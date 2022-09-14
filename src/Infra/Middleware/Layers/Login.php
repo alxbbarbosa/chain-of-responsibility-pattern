@@ -20,7 +20,7 @@ class Login extends AbstractMiddleware
             && $request->request->has('senha')) {
             /** @var UsuarioServiceInterface $usuarioServico */
             $usuarioServico = $this->container->get(UsuarioServiceInterface::class);
-            $session = new Session();
+            $session = $request->getSession();
             $usuarioId = $usuarioServico->login($request->request->get('usuario'), $request->request->get('senha'));
             if ($usuarioId) {
                 $usuario = $usuarioServico->obterPorId($usuarioId);
