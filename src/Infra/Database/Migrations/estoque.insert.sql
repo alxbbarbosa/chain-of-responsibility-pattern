@@ -1,7 +1,7 @@
 INSERT INTO categorias (id, descricao)
 VALUES (1, 'Linha Branca');
 
-INSERT INTO produtos (id, categoria_id, sku, estoque_atual, estoque_minimo, valor_compra, valor_venda, criacao_funcionario_id, atualizacao_funcionario_id, data_criacao, data_atualizacao)
+INSERT INTO produtos (id, categoria_id, estoque_atual, estoque_minimo, sku, valor_compra, valor_venda, criacao_funcionario_id, atualizacao_funcionario_id, data_criacao, data_atualizacao)
 VALUES (1, 1, 6, 2, '103456001', '2000.0', '2199.0', 7, 7, '2022-08-22 17:15:21', '2022-08-22 17:15:21'),
        (2, 1, 12, 2, '1023456002', '1600.0', '1799.0', 7, 7, '2022-08-22 18:12:33', '2022-08-22 18:12:33'),
        (3, 1, 16, 4, '1023456010', '760.0', '899.0', 7, 7, '2022-08-22 18:20:47', '2022-08-22 18:20:47'),

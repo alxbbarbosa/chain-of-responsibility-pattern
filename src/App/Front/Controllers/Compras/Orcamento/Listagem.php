@@ -15,8 +15,8 @@ class Listagem extends AbstractController
         $orcamentoServico = $this->container->get(OrcamentoServiceInterface::class);
         $orcamentos = $orcamentoServico->obterTodos();
 
-        $usuario = $this->getLoginByRequest($request);
+        $login = $this->getLoginByRequest($request);
 
-        return $this->response('Compras/Orcamento/listagem.php', compact('orcamentos', 'usuario'));
+        return $this->response('Compras/Orcamento/listagem.php', compact('orcamentos', 'login'));
     }
 }

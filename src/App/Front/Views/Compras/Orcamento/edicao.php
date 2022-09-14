@@ -1,6 +1,6 @@
 <?php
 $numberFormat = new NumberFormatter( 'pt_BR', NumberFormatter::CURRENCY );
-$entidade = unserialize($usuario['entidade']);
+$entidade = unserialize($login['entidade']);
 ?>
 <!doctype html>
 <html lang="en">
@@ -13,10 +13,16 @@ $entidade = unserialize($usuario['entidade']);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 </head>
 <body class="bg-light">
-<div class="container mt-3">
-    <h4>Sistema</h4>Usuário: <b><?= $usuario['usuario'] ?></b> <a href="http://localhost:8000/logout" class="btn btn-secondary btn-sm">Efetuar Logoff</a>
-    <hr>
-    <a href="#">Início</a> > <a href="#">Compras</a> > <a href="http://localhost:8000/compras/orcamentos/listagem">Listagem de Orçamentos</a> > Detalhes de Orçamento
+<?php include __DIR__ . '/../../Menu/menu.php' ?>
+<div class="container-fluid mt-3">
+    <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Início</a></li>
+            <li class="breadcrumb-item">Compras</li>
+            <li class="breadcrumb-item">Listagem de Orçamentos</li>
+            <li class="breadcrumb-item active" aria-current="page">Edição</li>
+        </ol>
+    </nav>
     <hr>
     <div>
         <div class="mb-3 row">
@@ -63,7 +69,7 @@ $entidade = unserialize($usuario['entidade']);
                        value="<?= $orcamento->getStatus()->toString() ?>">
             </div>
             <div class="col-sm-1">
-                <a class="btn btn-primary btn-sm" href="http://localhost/?pg=orcamento&acao=exibir&id=<?= $orcamento->getId() ?>">Solicitar Aprovação</a>
+                <a class="btn btn-primary btn-sm" href="/compras/orcamentos/aprovacao/<?= $orcamento->getId() ?>">Solicitar Aprovação</a>
             </div>
         </div>
         <div class="mb-3 row">
@@ -108,7 +114,7 @@ $entidade = unserialize($usuario['entidade']);
             <td></td>
             </td>
             <td>
-                <a class="btn btn-primary btn-sm" href="http://localhost/?pg=orcamento&acao=exibir&id=<?= $orcamento->getId() ?>">Adicionar</a>
+                <a class="btn btn-primary btn-sm" href="/compras/orcamentos/<?= $orcamento->getId() ?>/adicionar-item">Adicionar</a>
             </td>
         </tr>
         <?php
@@ -125,9 +131,9 @@ $entidade = unserialize($usuario['entidade']);
                            value="<?= $item->getQuantidade() ?>">
                     </div></td>
                 <td><?= $numberFormat->format($item->getValorTotal()) ?></td>
-                <td>
-                    <a class="btn btn-warning btn-sm" href="http://localhost/?pg=orcamento&acao=exibir&id=<?= $orcamento->getId() ?>">Alterar</a>
-                    <a class="btn btn-danger btn-sm" href="http://localhost/?pg=orcamento&acao=exibir&id=<?= $orcamento->getId() ?>">Remover</a></td>
+                <td class="col-sm-2">
+                    <a class="btn btn-warning btn-sm" href="/compras/orcamentos/<?= $orcamento->getId() ?>/item/<?= $item->getId() ?>/alterar">Alterar</a>
+                    <a class="btn btn-danger btn-sm" href="/compras/orcamentos/<?= $orcamento->getId() ?>/item/<?= $item->getId() ?>/remover">Remover</a></td>
             </tr>
         <?php endforeach; ?>
         </tbody>
@@ -181,8 +187,8 @@ $entidade = unserialize($usuario['entidade']);
                 <td>
                     <?php
                     if ($aprovador->getFuncionario()->getId() === $entidade->getId()) : ?>
-                    <a class="btn btn-success btn-sm" href="http://localhost/?pg=orcamento&acao=exibir&id=<?= $orcamento->getId() ?>">Aprovar</a>
-                    <a class="btn btn-danger btn-sm" href="http://localhost/?pg=orcamento&acao=exibir&id=<?= $orcamento->getId() ?>">Reprovar</a></td>
+                    <a class="btn btn-success btn-sm" href="/compras/orcamentos/<?= $orcamento->getId() ?>/aprovador/<?= $aprovador->getFuncionario()->getId() ?>/aprovar">Aprovar</a>
+                    <a class="btn btn-danger btn-sm" href="/compras/orcamentos/<?= $orcamento->getId() ?>/aprovador/<?= $aprovador->getFuncionario()->getId() ?>/reprovar">Reprovar</a></td>
                     <?php endif; ?>
                 </td>
             </tr>

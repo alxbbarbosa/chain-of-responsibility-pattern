@@ -17,8 +17,8 @@ class Edicao extends AbstractController
 
         $orcamento = $orcamentoServico->obterPorId((int)$request->query->get('segment4'));
 
-        $usuario = $this->getLoginByRequest($request);
+        $login = $this->getLoginByRequest($request);
 
-        return $this->response('Compras/Orcamento/edicao.php', compact('orcamento', 'usuario'));
+        return $this->response('Compras/Orcamento/edicao.php', compact('orcamento', 'login'));
     }
 }

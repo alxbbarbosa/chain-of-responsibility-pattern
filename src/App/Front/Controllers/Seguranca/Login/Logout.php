@@ -17,7 +17,7 @@ class Logout extends AbstractController
         $session = $request->getSession();
         $session->clear();
         $session->invalidate();
-        $referer = $request->headers->get('referer');
-        return new RedirectResponse($referer);
+
+        return $this->redirectBackFrom($request);
     }
 }

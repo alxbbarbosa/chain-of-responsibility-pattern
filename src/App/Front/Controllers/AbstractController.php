@@ -3,6 +3,7 @@
 namespace App\Front\Controllers;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -33,6 +34,12 @@ abstract class AbstractController
         $response->headers->set('Content-Type', 'text/html');
 
         return $response;
+    }
+
+    protected function redirectBackFrom(Request $request): Response
+    {
+        $referer = $request->headers->get('referer');
+        return new RedirectResponse($referer);
     }
 
     abstract public function action(Request $request): Response;

@@ -20,8 +20,8 @@ VALUES (1, 'analista'),
 
 INSERT INTO funcionarios (id, nome, email, funcao_id, departamento_id)
 VALUES (1, 'João A. Silva', 'joao.silva@corporativo.xpto.com', 7, 1),
-       (2, 'Marcelo S. Souza', 'marcelo.souza@corporativo.xpto.com', 6, 1),
-       (3, 'William F. Silva', 'william.silva@corporativo.xpto.com', 6, 1),
+       (2, 'Marcelo S. Souza', 'marcelo.souza@corporativo.xpto.com', 5, 1),
+       (3, 'William F. Silva', 'william.silva@corporativo.xpto.com', 5, 1),
        (4, 'Geraldo A. Machado', 'geraldo.machado@corporativo.xpto.com', 8, 1),
        (5, 'Felipe B. Vieira', 'felipe.vieira@corporativo.xpto.com', 9, 1),
        (6, 'Marcio A. Oliveira', 'marcio.oliveira@corporativo.xpto.com', 8, 6),

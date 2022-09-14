@@ -1,8 +1,5 @@
 FROM php:8.1.0-fpm
-ARG uid=1000
-ARG gid=1000
-ARG user=docker
-ARG group=docker
+ENV TZ=America/Sao_Paulo
 ARG PHP_IDE_CONFIG="serverName=Chain-Of-Responsibility-Pattern".
 ARG XDEBUG_TRIGGER=docker
 #ARG PHP_AUTOCONF="/usr/bin/autoconf"
@@ -36,11 +33,9 @@ RUN pear channel-update pear.php.net && \
 #RUN echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini
 RUN apt-get update && apt-get -y install sudo
 
-RUN useradd -G www-data,root -u $uid -d /home/$user $user
-RUN mkdir -p /home/$user/.composer && \
-    chown -R $user:$user /home/$user
-
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+COPY --chown=root:www-data . /var/www/
 
 #WORKDIR /var/
 #COPY postfix/* /etc/postfix/
@@ -50,4 +45,6 @@ EXPOSE 2525 80
 
 WORKDIR /var/www/
 
-USER $user
+RUN chown www-data:root . -R \
+    && chown -R www-data:root /var/www/src/Infra/Database/ \
+    && chmod -R a+rw /var/www/src/Infra/Database/
