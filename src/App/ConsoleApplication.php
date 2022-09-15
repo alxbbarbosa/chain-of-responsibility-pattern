@@ -22,8 +22,7 @@ class ConsoleApplication
 {
     public function __construct(
         private readonly Container $container
-    )
-    {
+    ) {
     }
 
     public function main(): void
